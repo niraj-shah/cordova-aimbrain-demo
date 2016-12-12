@@ -48,6 +48,7 @@ var app = {
 
         document.getElementById('register').onclick = this.register.bind(this);
         document.getElementById('login').onclick = this.login.bind(this);
+        document.getElementById('clear').onclick = this.clear.bind(this);
     },
 
     createSession: function(success, error){
@@ -105,19 +106,25 @@ var app = {
         this.addMessage('Starting authenticate with ' + media);
         if(media == 'Video'){
             AimBrain.captureVideoToAuthenticate(function(data){
-                this.addMessage('Enrollment successful ' + JSON.stringify(data));
+                alert('Score: ' + data.score * 100 + '%');
+                this.addMessage('Login successful ' + JSON.stringify(data));
                 this.loginDone = true;
             }.bind(this), function(err){
-                this.addMessage('Enrollment failed ' + JSON.stringify(err));
+                this.addMessage('Login failed ' + JSON.stringify(err));
             }.bind(this));
         }else{
             AimBrain.captureImageToAuthenticate(function(data){
-                this.addMessage('Enrollment successful ' + JSON.stringify(data));
+                alert('Score: ' + data.score * 100 + '%');
+                this.addMessage('Login successful ' + JSON.stringify(data));
                 this.loginDone = true;
             }.bind(this), function(err){
-                this.addMessage('Enrollment failed ' + JSON.stringify(err));
+                this.addMessage('Login failed ' + JSON.stringify(err));
             }.bind(this));
         }
+    },
+
+    clear: function() {
+      this.messages.innerHTML = '';
     }
 };
 
