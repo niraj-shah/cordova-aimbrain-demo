@@ -22,6 +22,9 @@ var app = {
         this.bindEvents();
         this.messages = document.getElementById('messages');
         this.media = document.getElementById('media');
+        this.delay = document.getElementById('delay');
+        this.period = document.getElementById('period');
+
         this.hasSession = false;
         this.registerDone = false;
         this.loginDone = false;
@@ -49,6 +52,11 @@ var app = {
         document.getElementById('register').onclick = this.register.bind(this);
         document.getElementById('login').onclick = this.login.bind(this);
         document.getElementById('clear').onclick = this.clear.bind(this);
+        document.getElementById('startCollectingData').onclick = this.startCollectingData.bind(this);
+        document.getElementById('stopCollectingData').onclick = this.stopCollectingData.bind(this);
+        document.getElementById('submitCollectedData').onclick = this.submitCollectedData.bind(this);
+        document.getElementById('getScore').onclick = this.getScore.bind(this);
+        document.getElementById('scheduleDataSubmission').onclick = this.scheduleDataSubmission.bind(this);
     },
 
     createSession: function(success, error){
@@ -125,6 +133,75 @@ var app = {
 
     clear: function() {
       this.messages.innerHTML = '';
+    },
+
+    startCollectingData: function(){
+      if(!this.loginDone){
+          alert('Please complete login first');
+          return;
+      }
+
+      AimBrain.startCollectingData(function(){
+        this.addMessage('Data Collection Started');
+      }.bind(this), function(err){
+        this.addMessage('Error while starting data collection ' + JSON.stringify(err));
+      }.bind(this));
+    },
+
+    stopCollectingData: function(){
+      if(!this.loginDone){
+          alert('Please complete login first');
+          return;
+      }
+
+      AimBrain.stopCollectingData(function(){
+        this.addMessage('Data Collection Stopped');
+      }.bind(this), function(err){
+        this.addMessage('Error while stopping data collection ' + JSON.stringify(err));
+      }.bind(this));
+    },
+
+    submitCollectedData: function(){
+      if(!this.loginDone){
+          alert('Please complete login first');
+          return;
+      }
+
+      AimBrain.submitCollectedData(function(){
+        this.addMessage('Data Collection Submitted');
+      }.bind(this), function(err){
+        this.addMessage('Error while submitting data collection ' + JSON.stringify(err));
+      }.bind(this));
+    },
+
+    getScore: function(){
+      if(!this.loginDone){
+          alert('Please complete login first');
+          return;
+      }
+
+      AimBrain.getCurrentScore(function(data){
+        this.addMessage('Current Score ' + JSON.stringify(data));
+      }.bind(this), function(err){
+        this.addMessage('Error while getting current score ' + JSON.stringify(err));
+      }.bind(this));
+    },
+
+    scheduleDataSubmission: function(){
+      if(!this.loginDone){
+          alert('Please complete login first');
+          return;
+      }
+
+      var delay = parseInt(this.delay.value);
+      var period = parseInt(this.period.value);
+
+      this.addMessage('Scheduling data submission for delay ' + delay + ' and period ' + period);
+      AimBrain.scheduleDataSubmission(delay, period, function(data){
+        this.addMessage('Scheduling successfully done');
+      }.bind(this), function(err){
+        this.addMessage('Error while scheduling ' + JSON.stringify(err));
+      }.bind(this));
     }
 };
 

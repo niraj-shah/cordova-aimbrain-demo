@@ -39,10 +39,24 @@
     <body>
 
       <nav class="navbar navbar-inverse navbar-fixed-top">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="#">AimBrain Cordova App</a>
           </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#" id="clear">Clear Log</a></li>
+            </ul>
+          </div>
+
         </div>
       </nav>
 
@@ -61,10 +75,31 @@
                   <option selected="">Video</option>
               </select>
             </div>
+
             <div class="col-xs-12 buttons">
               <button id="register" class="btn btn-primary btn-block">Register</button>
               <button id="login" class="btn btn-success btn-block">Login</button>
-              <button id="clear" class="btn btn-warning btn-block">Clear Log</button>
+            </div>
+
+            <div class="col-xs-12 buttons">
+              <button id="startCollectingData" class="btn btn-success">Start Data Collection</button>
+              <button id="stopCollectingData" class="btn btn-danger">Stop Data Collection</button>
+              <button id="submitCollectedData" class="btn btn-primary">Submit Data</button>
+              <button id="getScore" class="btn btn-warning">Get Score</button>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-xs-6">
+              <label>Delay</label>
+              <input id="delay" type="number" value="5000" class="form-control">
+            </div>
+            <div class="col-xs-6">
+              <label>Period</label>
+              <input id="period" type="number" value="5000" class="form-control">
+            </div>
+            <div class="buttons col-xs-12">
+              <button id="scheduleDataSubmission" class="btn btn-success btn-block">Schedule Data Submission</button>
             </div>
           </div>
         </div>
@@ -77,8 +112,9 @@
 
       </div>
 
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>
