@@ -32,33 +32,53 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
+        <title>AimBrain Demo</title>
     </head>
     <body>
-        <div class="header">
-            <h1>AimBrain Cordova App</h1>
+
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">AimBrain Cordova App</a>
+          </div>
         </div>
-        <div>
-            <label>
-                <span>Select Method:</span>
-                <select class="media" id="media">
-                    <option>Photo</option>
-                    <option>Video</option>
-                </select>
-            </label>
-            <div class="buttons">
-              <button id="register">Register</button>
-              <button id="login">Login</button>
-              <button id="clear">Clear Log</button>
+      </nav>
+
+      <div class="container">
+
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">AimBrain Cordova App</a>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-12">
+              <label>Select Method:</label>
+              <select class="form-control" id="media">
+                  <option>Photo</option>
+                  <option selected="">Video</option>
+              </select>
             </div>
+            <div class="col-xs-12 buttons">
+              <button id="register" class="btn btn-primary btn-block">Register</button>
+              <button id="login" class="btn btn-success btn-block">Login</button>
+              <button id="clear" class="btn btn-warning btn-block">Clear Log</button>
+            </div>
+          </div>
         </div>
+
         <div class="plugin_log">
           <span>Plugin Log:</span>
           <ul id="messages">
           </ul>
         </div>
+
+      </div>
+
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>
