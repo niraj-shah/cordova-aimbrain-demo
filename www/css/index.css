@@ -24,11 +24,6 @@ body {
 
 }
 
-button{
-  padding: 10px;
-  margin: 10px;
-}
-
 .header{
   margin-bottom: 10px;
   border-bottom: 1px solid lightgray;
@@ -40,7 +35,7 @@ button{
 
 .buttons{
   text-align: center;
-  margin-top: 10px;
+  margin: 10px 0;
 }
 
 .plugin_log span{
@@ -50,4 +45,8 @@ button{
 .plugin_log .messages{
   padding-top: 10px;
   border-top: 1px solid lightgray;
+}
+
+.form-group {
+  margin-top: 15px;
 }
