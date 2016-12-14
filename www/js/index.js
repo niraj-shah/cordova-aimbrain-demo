@@ -54,12 +54,6 @@ var app = {
 
         this.addMessage("User ID: " + this.userId);
 
-        this.createSession(function(session) {
-          this.addMessage('Session created successfully: ' + JSON.stringify(session));
-        }, function(err){
-          this.addMessage("Session Error " + JSON.stringify(err));
-        }.bind(this));
-
         document.getElementById('register').onclick = this.register.bind(this);
         document.getElementById('login').onclick = this.login.bind(this);
         document.getElementById('clear').onclick = this.clear.bind(this);
@@ -69,6 +63,14 @@ var app = {
         document.getElementById('submitCollectedData').onclick = this.submitCollectedData.bind(this);
         document.getElementById('getScore').onclick = this.getScore.bind(this);
         document.getElementById('scheduleDataSubmission').onclick = this.scheduleDataSubmission.bind(this);
+
+        setTimeout(function() {
+          this.createSession(function(session) {
+            this.addMessage('Session created successfully: ' + JSON.stringify(session));
+          }.bind(this), function(err){
+            this.addMessage("Session Error " + JSON.stringify(err));
+          }.bind(this));
+        }.bind(this), 500 );
     },
 
     createSession: function(success, error){
@@ -76,7 +78,7 @@ var app = {
         AimBrain.createSession(this.userId, function(session){
             this.addMessage('Session created: ' + JSON.stringify(session));
             this.hasSession = true;
-            success();
+            success(session);
         }.bind(this), error);
     },
 
@@ -128,6 +130,7 @@ var app = {
                 alert('Score: ' + data.score * 100 + '%');
                 this.addMessage('Login successful ' + JSON.stringify(data));
                 this.loginDone = true;
+                this.startCollectingData();
             }.bind(this), function(err){
                 this.addMessage('Login failed ' + JSON.stringify(err));
             }.bind(this));
@@ -136,6 +139,7 @@ var app = {
                 alert('Score: ' + data.score * 100 + '%');
                 this.addMessage('Login successful ' + JSON.stringify(data));
                 this.loginDone = true;
+                this.startCollectingData();
             }.bind(this), function(err){
                 this.addMessage('Login failed ' + JSON.stringify(err));
             }.bind(this));
