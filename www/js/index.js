@@ -49,9 +49,21 @@ var app = {
           console.log('AimBrain configured');
         }
 
+        // set user_id on startup
+        this.userId = "USER_" + device.uuid;
+
+        this.addMessage("User ID: " + this.userId);
+
+        this.createSession(function(session) {
+          this.addMessage('Session created successfully: ' + JSON.stringify(session));
+        }, function(err){
+          this.addMessage("Session Error " + JSON.stringify(err));
+        }.bind(this));
+
         document.getElementById('register').onclick = this.register.bind(this);
         document.getElementById('login').onclick = this.login.bind(this);
         document.getElementById('clear').onclick = this.clear.bind(this);
+        document.getElementById('session').onclick = this.session.bind(this);
         document.getElementById('startCollectingData').onclick = this.startCollectingData.bind(this);
         document.getElementById('stopCollectingData').onclick = this.stopCollectingData.bind(this);
         document.getElementById('submitCollectedData').onclick = this.submitCollectedData.bind(this);
@@ -60,8 +72,6 @@ var app = {
     },
 
     createSession: function(success, error){
-        this.userId = "USER_" + (new Date().getTime());
-        this.addMessage('Registration in progress');
         this.addMessage('Creating Session');
         AimBrain.createSession(this.userId, function(session){
             this.addMessage('Session created: ' + JSON.stringify(session));
@@ -81,6 +91,7 @@ var app = {
     },
 
     _register: function(){
+        this.addMessage('Registration in progress');
         var media = this.media.value;
         this.addMessage('Starting enrollment with ' + media);
         if(media == 'Video'){
@@ -105,10 +116,10 @@ var app = {
     },
 
     login: function(){
-        if(!this.registerDone){
-            alert('Please complete registration first');
-            return;
-        }
+        // if(!this.registerDone){
+        //     alert('Please complete registration first');
+        //     return;
+        // }
 
         var media = this.media.value;
         this.addMessage('Starting authenticate with ' + media);
@@ -133,6 +144,19 @@ var app = {
 
     clear: function() {
       this.messages.innerHTML = '';
+    },
+
+    session: function() {
+      if(!this.loginDone){
+          alert('Please complete login first');
+          return;
+      }
+
+      AimBrain.getSession(function(session){
+        this.addMessage('Session: ' + JSON.stringify(session));
+      }.bind(this), function(err){
+        this.addMessage('Failed to get session: ' + JSON.stringify(err));
+      }.bind(this));
     },
 
     startCollectingData: function(){
@@ -167,8 +191,9 @@ var app = {
           return;
       }
 
-      AimBrain.submitCollectedData(function(){
+      AimBrain.submitCollectedData(function(data){
         this.addMessage('Data Collection Submitted');
+        this.addMessage(JSON.stringify(data));
       }.bind(this), function(err){
         this.addMessage('Error while submitting data collection ' + JSON.stringify(err));
       }.bind(this));
