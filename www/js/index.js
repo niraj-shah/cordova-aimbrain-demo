@@ -228,6 +228,7 @@ var app = {
       this.addMessage('Scheduling data submission for delay ' + delay + ' and period ' + period);
       AimBrain.scheduleDataSubmission(delay, period, function(data){
         this.addMessage('Scheduling successfully done');
+        this.addMessage('Scheduling Result: ' + JSON.stringify(data) );
       }.bind(this), function(err){
         this.addMessage('Error while scheduling ' + JSON.stringify(err));
       }.bind(this));
