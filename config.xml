@@ -9,6 +9,9 @@
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="StatusBarStyle" value="lightcontent" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -23,4 +26,6 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <plugin name="cordova-plugin-aimbrain" spec="https://bitbucket.org/n_shah/aimbraincordovaplugin" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.2.1" />
 </widget>
