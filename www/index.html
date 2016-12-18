@@ -55,6 +55,7 @@
             <ul class="nav navbar-nav">
               <li><a href="#" id="clear">Clear Log</a></li>
               <li><a href="#" id="session">Get Session</a></li>
+              <li><a href="#" id="toggleFunctions">Toggle Functions</a></li>
             </ul>
           </div>
 
@@ -67,7 +68,7 @@
           <a class="navbar-brand" href="#">AimBrain Cordova App</a>
         </div>
 
-        <div class="form-group">
+        <div id="functions" class="form-group">
           <div class="row">
             <div class="col-xs-12">
               <label>Select Method:</label>
@@ -105,15 +106,31 @@
           <div class="form-group row">
             <div class="col-xs-6">
               <label>Delay</label>
-              <input id="delay" type="number" value="5000" class="form-control">
+              <input id="delay" type="number" value="5000" pattern="[0-9]*" class="form-control">
             </div>
             <div class="col-xs-6">
               <label>Period</label>
-              <input id="period" type="number" value="5000" class="form-control">
+              <input id="period" type="number" value="5000" pattern="[0-9]*" class="form-control">
             </div>
             <div class="buttons col-xs-12">
               <button id="scheduleDataSubmission" class="btn btn-success btn-block">Schedule Data Submission</button>
             </div>
+          </div>
+        </div>
+
+        <div id="textTraining" class="form-group" style="display: none;">
+          <div class="form-group">
+            <label>Type a colour</label>
+            <input type="text" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label>Type a number</label>
+            <input type="number" pattern="[0-9]*" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <button id="submitText" class="btn btn-warning btn-block">Submit Text</button>
           </div>
         </div>
 

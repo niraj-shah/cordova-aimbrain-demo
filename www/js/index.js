@@ -57,6 +57,8 @@ var app = {
         document.getElementById('register').onclick = this.register.bind(this);
         document.getElementById('login').onclick = this.login.bind(this);
         document.getElementById('clear').onclick = this.clear.bind(this);
+        document.getElementById('toggleFunctions').onclick = this.toggleFunctions.bind(this);
+        document.getElementById('submitText').onclick = this.submitText.bind(this);
         document.getElementById('session').onclick = this.session.bind(this);
         document.getElementById('startCollectingData').onclick = this.startCollectingData.bind(this);
         document.getElementById('stopCollectingData').onclick = this.stopCollectingData.bind(this);
@@ -148,6 +150,15 @@ var app = {
 
     clear: function() {
       this.messages.innerHTML = '';
+    },
+
+    toggleFunctions: function() {
+      $('#functions').toggle();
+      $('#textTraining').toggle();
+    },
+
+    submitText: function() {
+      $('#textTraining input').val('');
     },
 
     session: function() {
