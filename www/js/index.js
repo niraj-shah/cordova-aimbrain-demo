@@ -129,23 +129,32 @@ var app = {
         this.addMessage('Starting authenticate with ' + media);
         if(media == 'Video'){
             AimBrain.captureVideoToAuthenticate(function(data){
-                alert('Score: ' + data.score * 100 + '%');
-                this.addMessage('Login successful ' + JSON.stringify(data));
-                this.loginDone = true;
-                this.startCollectingData();
+                this._login(data, media);
             }.bind(this), function(err){
                 this.addMessage('Login failed ' + JSON.stringify(err));
             }.bind(this));
         }else{
             AimBrain.captureImageToAuthenticate(function(data){
-                alert('Score: ' + data.score * 100 + '%');
-                this.addMessage('Login successful ' + JSON.stringify(data));
-                this.loginDone = true;
-                this.startCollectingData();
+                this._login(data);
             }.bind(this), function(err){
                 this.addMessage('Login failed ' + JSON.stringify(err));
             }.bind(this));
         }
+    },
+
+    _login: function( data, media ) {
+      if ( data.score >= 0.9 && ( media == "Photo" || ( media == "Video" && data.liveliness == 1 ) ) ) {
+        alert('Login SUCCESSFUL! Score: ' + ( data.score * 100 ).toFixed(2) + '%');
+        this.addMessage('Login successful: ' + JSON.stringify(data));
+        this.loginDone = true;
+        this.startCollectingData();
+      } else if ( media == "Video" && data.liveliness == 0 ) {
+        alert('Login FAILED liveliness test. Score: ' + ( data.score * 100 ).toFixed(2) + '%');
+        this.addMessage('Login liveliness failed: ' + JSON.stringify(data));
+      } else {
+        alert('Login FAILED! Score: ' + ( data.score * 100 ).toFixed(2) + '%');
+        this.addMessage('Login failed: ' + JSON.stringify(data));
+      }
     },
 
     clear: function() {
