@@ -24,25 +24,29 @@ body {
 
 }
 
-.header{
+.header {
   margin-bottom: 10px;
   border-bottom: 1px solid lightgray;
 }
 
-.header h1{
+.header h1 {
   text-align: center;
 }
 
-.buttons{
+.buttons {
   text-align: center;
   margin: 10px 0;
 }
 
-.plugin_log span{
+.plugin_log {
+  overflow: hidden;
+}
+
+.plugin_log span {
   font-weight: bold;
 }
 
-.plugin_log .messages{
+.plugin_log .messages {
   padding-top: 10px;
   border-top: 1px solid lightgray;
 }
