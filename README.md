@@ -4,24 +4,26 @@ This is a demo application that makes use of the Cordova AimBrain Plugin.
 
 ## Usage
 
-Create a new Cordova project using the command line:
+1. Create a new Cordova project using the command line:
 
-```
-cordova create my-app
-```
+  ```
+  cordova create my-app
+  ```
 
-Download this repository (as a zip) and extract into a folder
+2. Download this repository (as a zip) and extract into a folder
 
-Copy the contents of the downloaded repository into your newly created Cordova app (from Step 1)
+3. Copy the contents of the downloaded repository into your newly created Cordova app (from Step 1)
 
-Add the required platforms using Cordova command-line:
+4. Add the required platforms using Cordova command-line:
 
-```
-cordova platform add android
-```
+  ```
+  cordova platform add android
+  ```
 
-Run the demo for your platform:
+5. Setup the plugin for your platform by following the Cordova AimBrain instructions
 
-```
-cordova run android --device
-```
+6. Run the demo for your platform:
+
+  ```
+  cordova run android --device
+  ```
