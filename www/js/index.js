@@ -42,11 +42,14 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         // Call AimBrain Configure Here
-        if(window.AimBrain){
+        if ( window.AimBrain ) {
           var KEY = "de545b49-62bf-41c9-8e69-5ff1a8860d18";
           var SECRET = "2bb3c63945d742c688c6c29e5428f80edb6b38d19cae4b7986417a8c3cfaec74";
-          AimBrain.init(KEY, SECRET);
-          console.log('AimBrain configured');
+          AimBrain.init(function() {
+            this.addMessage("AimBrain Init ");
+          }.bind(this), function(err) {
+            this.addMessage("AimBrain Init Error: " + JSON.stringify(err));
+          }.bind(this));
         }
 
         // set user_id on startup
